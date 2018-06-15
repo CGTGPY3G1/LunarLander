@@ -45,7 +45,7 @@ void Game::Display() {
 void Game::Update(const float & deltaTime) {
 	// if at least 1 attempt has been made
 	if(tryCount > 0) {
-		// count down time to a spawn meteor
+		// count down time to spawn a meteor
 		meteorTimer -= deltaTime;
 		// and create 1 if the time reaches 0
 		if(meteorTimer <= 0) CreateMeteor();

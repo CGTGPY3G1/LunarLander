@@ -4,7 +4,7 @@
 using namespace std;
 // the window width and height
 const float WIDTH = 800.0f, HEIGHT = 600.0f;
-Game game = Game(WIDTH, HEIGHT);
+Game game;
 
 void Display() {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -48,6 +48,7 @@ void main(int argA, char** argB) {
 	glEnable(GL_TEXTURE_2D);
 	glClearColor(0, 0, 0, 1);// set the clear colour to black
 	gluOrtho2D(0, WIDTH, 0, HEIGHT);
+	game = Game(WIDTH, HEIGHT);
 	// register callbacks 
 	glutDisplayFunc(Display);
 	glutReshapeFunc(Reshape);

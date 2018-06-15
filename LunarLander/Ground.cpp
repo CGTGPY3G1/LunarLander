@@ -50,9 +50,10 @@ void Ground::BuildGround(const float & width, const float & height, int noOfSect
 		}
 		
 		// create a new shape to use as both renderer and collider
-		Shape * shape = new Poly(Vector2(x+halfWidth, 0) - transform->GetPosition(), 4, Vector2(-halfWidth, 0), Vector2(halfWidth, 0), Vector2(halfWidth, y), Vector2(-halfWidth, lastHeight));
+		std::vector<Vector2> shapeData = { Vector2(-halfWidth, 0), Vector2(halfWidth, 0), Vector2(halfWidth, y), Vector2(-halfWidth, lastHeight) };
+		Shape * shape = new Poly(Vector2(x+halfWidth, 0) - transform->GetPosition(), shapeData);
 		shape->SetName("Ground");
-		shape->SetColour(0.4f, 0.4f, 0.4f, 0.0f); // make ground colour dark grey
+		shape->SetColour(0.4f, 0.4f, 0.4f, 1.0f); // make ground colour dark grey
 		AddRenderable(shape->Copy()); // add a copy of the new shape as a renderable
 		AddCollider(shape); // then add the original as a collider
 		lastHeight = y; // set the last height to the new height
@@ -60,8 +61,9 @@ void Ground::BuildGround(const float & width, const float & height, int noOfSect
 	// create a boundary 4 times higher than the screen height.  making it impossible to traval high enough to get over it with the available fuel
 	float boundaryHalfWidth = width / 4, boundaryHalfHeight = height * 2;
 	// create the right boundary
-	Shape * boundary = new Poly(Vector2((width/2) + boundaryHalfWidth, boundaryHalfHeight), 4, Vector2(-boundaryHalfWidth, -boundaryHalfHeight),
-								Vector2(boundaryHalfWidth, -boundaryHalfHeight), Vector2(boundaryHalfWidth, boundaryHalfHeight), Vector2(-boundaryHalfWidth, boundaryHalfHeight));
+	std::vector<Vector2> shapeData = { Vector2(-boundaryHalfWidth, -boundaryHalfHeight),
+		Vector2(boundaryHalfWidth, -boundaryHalfHeight), Vector2(boundaryHalfWidth, boundaryHalfHeight), Vector2(-boundaryHalfWidth, boundaryHalfHeight) };
+	Shape * boundary = new Poly(Vector2((width/2) + boundaryHalfWidth, boundaryHalfHeight), shapeData);
 	boundary->SetName("Ground");
 	AddCollider(boundary->Copy()); // add a copy of it as a collider
 	// move th original to the other side of the screen
@@ -75,7 +77,8 @@ void Ground::BuildGround(const float & width, const float & height, int noOfSect
 	// set the height of the landing pad to a quarter of its width
 	float landingHeight = landingHalfWidth * 0.5f;
 	// create a new shape to use as both renderer and collider
-	Shape * shape = new Poly(Vector2(0.0f, 0.0f), 4, Vector2(-landingHalfWidth, 0), Vector2(landingHalfWidth, 0), Vector2(landingHalfWidth, landingHeight), Vector2(-landingHalfWidth, landingHeight));
+	shapeData = { Vector2(-landingHalfWidth, 0), Vector2(landingHalfWidth, 0), Vector2(landingHalfWidth, landingHeight), Vector2(-landingHalfWidth, landingHeight) };
+	Shape * shape = new Poly(Vector2(0.0f, 0.0f), shapeData);
 	// set the shapes dimensions
 	shape->SetDimensions(landingHalfWidth * 2, landingHeight);
 	shape->SetName("LandingPad");

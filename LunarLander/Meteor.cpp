@@ -25,8 +25,10 @@ Meteor::Meteor(const Vector2 & position, Vector2 & orientation, Vector2 & veloci
 	}
 	AddRenderable(explosionAnim); // add the animation to the GameObject	
 	// create colliders for the meteor
-	Shape * collider1 = new Poly(Vector2(0.0f, -0.0f), 8, Vector2(-6.0f, -14.0f), Vector2(9.0f, -14.0f), Vector2(11.0f, -9.0f), Vector2(3.0f, 11.0f), Vector2(-7.0f, 10.0f), Vector2(-15.0f, 5.0f), Vector2(-16.0f, -1.0f), Vector2(-9.0f, -11.0f));
-	Shape * collider2 = new Poly(Vector2(0.0f, -0.0f), 7, Vector2(11.0f, -9.0f), Vector2(15.0f, -5.0f), Vector2(15.0f, 0.0f), Vector2(13.0f, 9.0f), Vector2(8.0f, 13.0f), Vector2(6.0f, 13.0f), Vector2(3.0f, 11.0f));
+	std::vector<Vector2> colData = { Vector2(-6.0f, -14.0f), Vector2(9.0f, -14.0f), Vector2(11.0f, -9.0f), Vector2(3.0f, 11.0f), Vector2(-7.0f, 10.0f), Vector2(-15.0f, 5.0f), Vector2(-16.0f, -1.0f), Vector2(-9.0f, -11.0f) };
+	Shape * collider1 = new Poly(Vector2(0.0f, -0.0f), colData);
+	colData = { Vector2(11.0f, -9.0f), Vector2(15.0f, -5.0f), Vector2(15.0f, 0.0f), Vector2(13.0f, 9.0f), Vector2(8.0f, 13.0f), Vector2(6.0f, 13.0f), Vector2(3.0f, 11.0f) };
+	Shape * collider2 = new Poly(Vector2(0.0f, -0.0f), colData);
 	AddCollider(collider1); AddCollider(collider2); // add the colliders to the meateor
 }
 

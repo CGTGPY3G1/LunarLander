@@ -42,16 +42,22 @@ Lander::Lander(const Vector2 & position, Vector2 & orientation) : GameObject(pos
 	}
 	AddRenderable(explosionAnim);
 	// create 3 colliders that represent the shape of the landers body and add them to the GameObject
-	AddCollider(new Poly(Vector2(-7.0f, -9.0f), 6, Vector2(-1.0f, -5.5f), Vector2(1.0f, -5.5f), Vector2(1.0f, -3.0f), Vector2(-1.0f, 8.5f), Vector2(-3.0f, 4.0f), Vector2(-3.0f, 1.0f)));
-	AddCollider(new Poly(Vector2(7.0f, -9.0f), 6, Vector2(-1.0f, -5.5f), Vector2(1.0f, -5.5f), Vector2(3.0f, 1.0f), Vector2(3.0f, 4.0f), Vector2(1.0f, 8.5f), Vector2(-1.0f, -3.0f)));
-	AddCollider(new Poly(Vector2(0.0f, 0.0f), 9, Vector2(-3.0f, -13.0f), Vector2(0.0f, -14.5f), Vector2(3.0f, -13.0f), Vector2(6.0f, -2.0f), Vector2(6.0f, 9.0f), Vector2(1.5f, 17.0f), Vector2(-1.5f, 17.0f), Vector2(-6.0f, 9.0f), Vector2(-6.0f, -2.0f)));
+	std::vector<Vector2> colData = { Vector2(-1.0f, -5.5f), Vector2(1.0f, -5.5f), Vector2(1.0f, -3.0f), Vector2(-1.0f, 8.5f), Vector2(-3.0f, 4.0f), Vector2(-3.0f, 1.0f) };
+	AddCollider(new Poly(Vector2(-7.0f, -9.0f), colData));
+	colData = { Vector2(-1.0f, -5.5f), Vector2(1.0f, -5.5f), Vector2(3.0f, 1.0f), Vector2(3.0f, 4.0f), Vector2(1.0f, 8.5f), Vector2(-1.0f, -3.0f) };
+	AddCollider(new Poly(Vector2(7.0f, -9.0f), colData));
+	colData = { Vector2(-3.0f, -13.0f), Vector2(0.0f, -14.5f), Vector2(3.0f, -13.0f), Vector2(6.0f, -2.0f), Vector2(6.0f, 9.0f), Vector2(1.5f, 17.0f), Vector2(-1.5f, 17.0f), Vector2(-6.0f, 9.0f), Vector2(-6.0f, -2.0f) };
+	AddCollider(new Poly(Vector2(0.0f, 0.0f), colData));
 
 	// create a new child game object to seperate the bodies colliders from the legs colliders
 	GameObject * legs = new GameObject(transform->GetPosition(), transform->GetOrientation(), "Legs");
 	// same as above but for the new child object
-	legs->AddCollider(new Poly(Vector2(-7.0f, -16.5f), 4, Vector2(-2.0f, -1.0f), Vector2(1.0f, -1.0f), Vector2(1.0f, 1.0f), Vector2(-0.5f, 1.0f)));
-	legs->AddCollider(new Poly(Vector2(7.0f, -16.5f), 4, Vector2(-1.0f, -1.0f), Vector2(2.0f, -1.0f), Vector2(0.5f, 1.0f), Vector2(-1.0f, 1.0f)));
-	legs->AddCollider(new Poly(Vector2(0.0f, -16.5f), 4, Vector2(-1.5f, -1.0f), Vector2(1.5f, -1.0f), Vector2(0.5f, 1.0f), Vector2(-0.5f, 1.0f)));
+	colData = { Vector2(-2.0f, -1.0f), Vector2(1.0f, -1.0f), Vector2(1.0f, 1.0f), Vector2(-0.5f, 1.0f) };
+	legs->AddCollider(new Poly(Vector2(-7.0f, -16.5f), colData));
+	colData = { Vector2(-1.0f, -1.0f), Vector2(2.0f, -1.0f), Vector2(0.5f, 1.0f), Vector2(-1.0f, 1.0f) };
+	legs->AddCollider(new Poly(Vector2(7.0f, -16.5f), colData));
+	colData = { Vector2(-1.5f, -1.0f), Vector2(1.5f, -1.0f), Vector2(0.5f, 1.0f), Vector2(-0.5f, 1.0f) };
+	legs->AddCollider(new Poly(Vector2(0.0f, -16.5f), colData));
 	AddChild(legs); // add the legs as a child of the lander
 }
 

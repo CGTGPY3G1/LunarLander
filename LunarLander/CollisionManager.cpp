@@ -13,9 +13,11 @@ bool CollisionManager::CheckCollision(GameObject * object1, GameObject * object2
 	// get the colliders from each object and note the number of them
 	std::vector<Shape*> object1Colliders = object1->GetColliders(), object2Colliders = object2->GetColliders();
 	size_t collider1Count = object1Colliders.size(), collider2Count = object2Colliders.size();
+	if (collider1Count == 0 || collider2Count == 0) return false;
 	// compare all of the collisders on each object with the colliders 
 	// on the other.  the loop exits when a collision is found or there
 	// are no more collider pairs to check
+	std::string name1 = object1->GetName(), name2 = object2->GetName();
 	for(size_t i = 0; i < collider1Count && !toReturn; i++) {
 		for(size_t j = 0; j < collider2Count && !toReturn; j++) {
 			Shape * shape1 = object1Colliders[i], *shape2 = object2Colliders[j];

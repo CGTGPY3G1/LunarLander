@@ -10,7 +10,7 @@ public:
 	/// </summary>
 	/// <param name="width">The world width.</param>
 	/// <param name="height">The world height.</param>
-	Game(const float & worldWidth, const float & worldHeight);
+	Game(const float & worldWidth = 800, const float & worldHeight = 600);
 	~Game();
 	/// <summary>
 	/// Displays this instance.
@@ -96,7 +96,7 @@ private:
 	/// </summary>
 	void UpdateKeys();
 	std::vector<GameObject*> backgroundObjects;
-	GameObject * lander, * ground;
+	GameObject * lander = nullptr, * ground = nullptr;
 	bool gameOver = true, success = false;
 	float playTime = 0, meteorTimer = 1, width = 800.0f, height = 600.0f;
 	int tryCount = 0, landCount = 0, crashCount = 0;
